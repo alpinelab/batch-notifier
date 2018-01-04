@@ -16,12 +16,13 @@ module BatchNotifier
       yield(configuration) if block_given?
     end
 
-    def transactional group_id:, recipients:, title:, body:
+    def transactional group_id:, recipients:, title:, body:, deeplink:
       transactional = BatchNotifier::Transactional.new(
         group_id,
         recipients,
         title,
-        body
+        body,
+        deeplink
       )
       post(BatchNotifier::Transactional::ENDPOINT, transactional.payload)
     end
